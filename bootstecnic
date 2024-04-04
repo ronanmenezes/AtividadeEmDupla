@@ -1,0 +1,137 @@
+-- MySQL Administrator dump 1.4
+--
+-- ------------------------------------------------------
+-- Server version	5.5.5-10.4.32-MariaDB
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
+
+--
+-- Create schema bootstecnic
+--
+
+CREATE DATABASE IF NOT EXISTS bootstecnic;
+USE bootstecnic;
+
+--
+-- Definition of table `adm`
+--
+
+DROP TABLE IF EXISTS `adm`;
+CREATE TABLE `adm` (
+  `idadm` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `cpf` varchar(14) NOT NULL,
+  `senha` varchar(200) NOT NULL,
+  `cadastro` datetime NOT NULL,
+  `alteracao` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `ativo` char(1) NOT NULL DEFAULT 'A',
+  PRIMARY KEY (`idadm`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `adm`
+--
+
+/*!40000 ALTER TABLE `adm` DISABLE KEYS */;
+INSERT INTO `adm` (`idadm`,`cpf`,`senha`,`cadastro`,`alteracao`,`ativo`) VALUES 
+ (1,'123.456.789-10','$2y$10$VIt09OHcRW3hoCfHxgKvvOUfsQVcL2TA5O.YDVWaWOUHxom4b7p82','0000-00-00 00:00:00','2024-04-04 14:58:45','A');
+/*!40000 ALTER TABLE `adm` ENABLE KEYS */;
+
+
+--
+-- Definition of table `cliente`
+--
+
+DROP TABLE IF EXISTS `cliente`;
+CREATE TABLE `cliente` (
+  `idcliente` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `nome` varchar(80) NOT NULL,
+  `cpf` varchar(45) NOT NULL,
+  `telefone` varchar(13) NOT NULL,
+  `cadastro` datetime NOT NULL,
+  `alteracao` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `ativo` char(1) NOT NULL DEFAULT 'A',
+  PRIMARY KEY (`idcliente`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `cliente`
+--
+
+/*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
+INSERT INTO `cliente` (`idcliente`,`nome`,`cpf`,`telefone`,`cadastro`,`alteracao`,`ativo`) VALUES 
+ (1,'Luciano Coelho','000.000.000-00','(33)99999-999','0000-00-00 00:00:00','2024-04-04 16:01:42','A');
+/*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
+
+
+--
+-- Definition of table `pedido`
+--
+
+DROP TABLE IF EXISTS `pedido`;
+CREATE TABLE `pedido` (
+  `idpedido` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `idadm` int(10) unsigned NOT NULL,
+  `idcliente` int(10) unsigned NOT NULL,
+  `idservico` int(10) unsigned NOT NULL,
+  `datainicio` date NOT NULL,
+  `datafim` date NOT NULL,
+  `cadastro` datetime NOT NULL,
+  `alteracao` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `ativo` char(1) NOT NULL DEFAULT 'A',
+  PRIMARY KEY (`idpedido`,`idadm`,`idcliente`,`idservico`),
+  KEY `FK_pedido_adm` (`idadm`),
+  KEY `FK_pedido_cliente` (`idcliente`),
+  KEY `FK_pedido_servico` (`idservico`),
+  CONSTRAINT `FK_pedido_adm` FOREIGN KEY (`idadm`) REFERENCES `adm` (`idadm`),
+  CONSTRAINT `FK_pedido_cliente` FOREIGN KEY (`idcliente`) REFERENCES `cliente` (`idcliente`),
+  CONSTRAINT `FK_pedido_servico` FOREIGN KEY (`idservico`) REFERENCES `servico` (`idservico`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `pedido`
+--
+
+/*!40000 ALTER TABLE `pedido` DISABLE KEYS */;
+/*!40000 ALTER TABLE `pedido` ENABLE KEYS */;
+
+
+--
+-- Definition of table `servico`
+--
+
+DROP TABLE IF EXISTS `servico`;
+CREATE TABLE `servico` (
+  `idservico` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `servico` varchar(45) NOT NULL,
+  `ativo` char(1) NOT NULL DEFAULT 'A',
+  PRIMARY KEY (`idservico`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `servico`
+--
+
+/*!40000 ALTER TABLE `servico` DISABLE KEYS */;
+INSERT INTO `servico` (`idservico`,`servico`,`ativo`) VALUES 
+ (1,'Consertar celular','A');
+/*!40000 ALTER TABLE `servico` ENABLE KEYS */;
+
+
+
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
