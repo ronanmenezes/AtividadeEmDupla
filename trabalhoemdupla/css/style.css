@@ -7,7 +7,7 @@ body{
       font-family: "Poppins", sans-serif;
       font-weight: 500;
       font-style: normal;
-      
+    
     }
 
 /* Toggle Styles */
@@ -36,7 +36,7 @@ body{
   height: 100%;
   margin-left: -250px;
   overflow-y: auto;
-  background: #37474f;
+  background: #ffffff;
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
@@ -44,7 +44,7 @@ body{
 }
 
 #sidebar header {
-  background-color: #263238;
+  background-color: #ffffff;
   font-size: 20px;
   line-height: 52px;
   text-align: center;
@@ -64,14 +64,14 @@ body{
 #sidebar .nav a {
   background: none;
  
-  color: #cfd8dc;
+  color: #000000;
   font-size: 14px;
   padding: 16px 24px;
 }
 
 #sidebar .nav a:hover {
   background: none;
-  color: #eceff1;
+  color: #035d8a;
 }
 
 #sidebar .nav a i {

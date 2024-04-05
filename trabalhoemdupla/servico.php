@@ -1,7 +1,7 @@
-
+<div class="container p-5">
 <div class="card">
   <div class="card-header text-center">
-    <h4>SERVIÇO <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" > <i class="bi bi-plus-lg"></i></button><h4>
+    <h4>SERVIÇOS <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#modalAddServico" > <i class="bi bi-plus-lg"></i></button><h4>
   </div>
   <div class="card-body">
 
@@ -43,5 +43,6 @@
       </tbody>
     </table>
 
+</div>
 </div>
 </div>
